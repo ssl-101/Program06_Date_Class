@@ -77,3 +77,70 @@ int Date::getYear() const {
     return year;
 }
 
+//=============
+// Setters
+//=============
+
+bool Date::setDate(int m, int d, int y) {
+    if (isValid(m, d, y)){
+        month = m;
+        day = d;
+        year = y;
+        return true;
+    }
+    return false; // if invalid
+}
+bool Date::setMonth(int m) {
+    if (isValid(m, day, year)){
+        month = m;
+        return true;
+    }
+    return false;
+}
+bool Date::setDay(int d) {
+    if (isValid(month, d, year)){
+        day = d;
+        return true;
+    }
+    return false;
+}
+bool Date::setYear(int y) {
+    if (isValid(month, day, y)){
+        year = y;
+        return true;
+    }
+    return false;
+}
+
+//=====================
+// Formatted String
+//=====================
+
+// mm/dd/yyyy
+std::string Date:: toNumericString() const{
+    std::ostringstream oss;
+    oss << std::setfill('0')<< std ::setw(2) << month << "/"
+        << std::setw(2) << day << "/"
+        << year;
+        return oss.str();
+}
+
+// Month name Day, year
+std::string Date:: toLongString() const {
+    const std::string monthNames[] = {
+        "", "January", "February", " March", "April", "May", 
+        "June", "July", "August", "September", "October", "November", "December"
+    };
+    std::ostringstream oss;
+    oss << monthNames[month] << " "<< day << ", " << year;
+    return oss.str();
+}
+
+// yyyy-mm-dd
+std::string Date::toISOString()const {
+    std::ostringstream oss;
+    oss << year << "-"
+        << std::setfill('0') << std::setw(2) <<month << "-"
+        << std::setw(2) << day;
+    return oss.str();
+    }
