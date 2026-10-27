@@ -32,3 +32,48 @@ int Date::daysInMonth(int m, int y) const {
     }
 }
 
+// check if correct month , day and year combination.
+bool Date::isValid(int m, int d, int y) const {
+    if (y < 1) return false;
+    if (m < 1 || m > 12) return false;
+    if (d < 1 || d > daysInMonth(m,y)) return false;
+    return true;
+}
+
+//====================
+// Constructors
+//====================
+
+// default constructor: sets date to January 1, 1900
+Date::Date(){
+    month = 1;
+    day = 1;
+    year = 1900;
+}
+//parameter for constructor: validates input before saving
+Date::Date (int m, int d, int y) {
+    if (isValid(m, d, y)){
+        month = m;
+        day = d;
+        year = y;
+    }else{
+        //back to default if invalid
+        month = 1;
+        day = 1;
+        year = 1900;
+    }
+}
+//=============
+// Getters
+//=============
+
+int Date::getMonth() const {
+    return month;
+}
+int Date::getDay() const {
+    return day;
+}
+int Date::getYear() const {
+    return year;
+}
+
